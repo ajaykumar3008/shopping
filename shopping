@@ -1,0 +1,130 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1 align='center'>
+			SHOPPING MALL
+			<h1>
+				<div class='container' align='center'>
+					<input list="ls">
+					<datalist id='ls'>
+						<option>CAR</option>
+						<option>bike</option>
+						<option>truck</option>
+						<option>cycle</option>
+						<br>
+				</div>
+				<br>
+				<div class="row" id="prdctrow"></div>
+	</div>
+	<script>
+  const products={
+  "Products": [
+    {
+      "ID": "1",
+      "name": "car",
+      "price": 200,
+      "image": "https://www.shipacarinc.com/wp-content/uploads/2022/11/shipacar_Chevrolet_Corvette_C8_Z06_photorealistic_9ff55562-0be5-45a1-a2d5-7f35d7b8aea1.jpg"
+    },
+    {
+      "ID": "2",
+      "name": "bike",
+      "price": 200,
+      "image": "https://www.livemint.com/lm-img/img/2023/04/15/600x338/mt_15_v2_1681556876015_1681558132152_1681558132152.png"
+    },
+    {
+      "ID": "3",
+      "name": "bicycle",
+      "price": 200,
+      "image": "https://t4.ftcdn.net/jpg/00/43/45/55/360_F_43455538_fdC4GBi2bCEB0aXDt4R1mVPH5JpjAlcf.jpg"
+    },
+    {
+      "ID": "4",
+      "name": "truck",
+      "price": 200,
+      "image": "https://www.komatsu.eu/-/media/projects/komatsu/products/rigid-dump-trucks/hd325_8.ashx?rev=605430f40125462b91c25b15a15a86e9"
+    },
+    {
+      "ID": "5",
+      "name": "ship",
+      "price": 200,
+      "image": "https://t4.ftcdn.net/jpg/00/43/45/55/360_F_43455538_fdC4GBi2bCEB0aXDt4R1mVPH5JpjAlcf.jpg"
+    },
+    {
+      "ID": "6",
+      "name": "aeroplane",
+      "price": 200,
+      "image": "https://wallpaperaccess.com/full/1331230.jpg"
+    },
+    {
+      "ID": "7",
+      "name": "jet",
+      "price": 200,
+      "image": "https://thumbs.dreamstime.com/b/american-usaf-fighter-jet-flying-drop-fuel-tanks-air-intakes-view-weapons-loaded-variety-missiles-american-f-fighter-144532564.jpg"
+    },
+    {
+      "ID": "8",
+      "name": "rocket",
+      "price": 200,
+      "image": "https://cdn.mos.cms.futurecdn.net/qTmvroik2NtHVGsfCHyyxF-1200-80.jpg"
+    }
+  ]
+}
+;
+
+	const prdctRow=document.getElementById("prdctrow");
+
+	for(const product of products.Products){
+	
+		const card=document.createElement('div');
+		card.className='col-md-3';
+		card.innerHTML = `<div class="card" style="width:300px">
+		    <img class="card-img-top" class="container" src=${product.image} style="object-fit:cover; height:200px">
+		    <div class="card body">
+		    <h4 class="card title">${product.name}</h4>
+		    <p class="card text">${product.price}</p>
+		    <button class="btn btn-primary" onclick="addToCart('${product.name}', ${product.price}, '${product.image}')">Add To Cart</button>
+		    </div>
+		    </div>`;
+
+		prdctRow.appendChild(card);
+	}
+
+
+	function addToCart(name, price, image) {
+	    window.location.href = `http://localhost:8081/shoopingcart/shopping-cart?pname=${name}&pprice=${price}&pimage=${image}`;
+	}
+
+
+</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
