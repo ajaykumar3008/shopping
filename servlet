@@ -1,0 +1,91 @@
+package shoopingcart;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+public class ShoppingCart extends HttpServlet {
+
+	ArrayList<Cart> myCart = new ArrayList<>();
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
+		HttpSession session = req.getSession(true);
+
+		session.setMaxInactiveInterval(300);
+
+		String name = req.getParameter("pname");
+		String price = req.getParameter("pprice");
+		String image = req.getParameter("pimage");
+
+		Cart newProduct = new Cart(name, price, image);
+		myCart.add(newProduct);
+
+		res.getWriter().write("<html>");
+
+		res.getWriter().write("<head>");
+		res.getWriter().write("<meta name='viewport' content='width=device-width, initial-scale=1'>");
+		res.getWriter().write(
+				"<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css' rel='stylesheet'>");
+		res.getWriter().write(
+				"<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js'></script>");
+		res.getWriter().write("</head>");
+		res.getWriter().write("<body>");
+		res.getWriter().write("<div class='container'>");
+		res.getWriter().write("<h1 align='center'>My Cart</h1>");
+		res.getWriter().write("<div class='row' id='prdctrow'>");
+
+		for (Cart products : myCart) {
+
+			res.getWriter().write("<div class='card' style='width:300px'>");
+			res.getWriter().write("<img class='card-img-top' class='container' src=" + products.getImage()
+					+ " style='object-fit:cover; height:200px'>");
+			res.getWriter().write("<div class='card body'>");
+			res.getWriter().write("<h4 class='card title'>" + products.getName() + "</h4>");
+			res.getWriter().write("<p class='card text'>" + products.getPrice() + "</p>");
+			res.getWriter().write(
+					"<button class='btn btn-primary' onclick='remove(${product.name},${product.price},${product.image})'>Remove<button>");
+			res.getWriter().write("</div>");
+			res.getWriter().write("</div>");
+		}
+
+		res.getWriter().write("</div>");
+		res.getWriter().write("</div>");
+		res.getWriter().write("</body>");
+
+	}
+
+}
+
+class Cart {
+
+	String name;
+	String price;
+	String image;
+
+	public Cart(String name, String price, String image) {
+
+		this.name = name;
+		this.price = price;
+		this.image = image;
+
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+}
